@@ -1,0 +1,51 @@
+/* Q1 */
+.container{
+    display: flex;
+    width: 400px;
+    height: 400px;
+    border: 2px solid cyan;
+    
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.item{
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    font-size: 50px;
+    text-align: center;
+    background-color: grey;
+    border-radius: 10px;
+    
+}
+    
+
+/* Q2*/
+/* start */
+.nav{
+    height: 50px;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+    background-color: pink;
+    border: 2px solid cyan;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.menu{
+    height: 50px;
+    width: 10vw;
+    font-size: 2rem;
+    margin-left: 5px;
+    font-size: 24px;
+    line-height: 45px;
+}

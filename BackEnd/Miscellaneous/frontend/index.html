@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get request Form</h1>
+    <form method="get" action="http://localhost:3000/register">
+        <label for="un"> Enter username: 
+            <input type="text" id="un">
+        </label>
+        <br>
+        <label for="pass"> Enter password: 
+            <input type="password" id="pass">
+        </label>
+        <br>
+        <button style="width: 290px;">login</button>
+    </form>
+
+    <h1>Post request Form</h1>
+    <form method="post" action="http://localhost:3000/register">
+        <label for="un"> Enter username: 
+            <input type="text" id="un">
+        </label>
+        <br>
+        <label for="pass"> Enter password: 
+            <input type="password" id="pass">
+        </label>
+        <br>
+        <button style="width: 290px;">login</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+div{
+    height: 200px;
+    width: 400px;
+    background-color: pink;
+}
+
+ul{
+    /* background-color: blue; */
+}
+
+li{
+    /* background-color: greenyellow; */
+    line-height: 2;
+}
+.delete{
+    position: relative;
+    left: 10px;
+}

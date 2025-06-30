@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 2000px;
+        }
+        #div button, p{
+            display: inline;
+            /* gap: 100px; */
+            /* align-content: space-between; */
+            margin-right: 450px;
+        }
+        #downloadBar{
+            position: sticky;
+            width: 100%;
+            height: 10px;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid black;
+            /* margin: auto; */
+            top: 97%;
+            /* left: 40%; */
+            /* bottom: -20%; */
+            
+        }
+        #progressBar{
+            width: 0%;
+            height: 10px;
+            background-color: green;
+            border-radius: 10px;
+            transition: cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Build a character counter for a text area or input field, which updates in real-time as the user types and enforces a character limit. -->
+    <div id="container"> 
+        <label for="text"> Notes
+            <!-- <input type="t"> -->
+        </label>
+        <br>
+        <textarea name="" id="text" cols="70" rows="7"></textarea>
+    </div>
+    <div id="div">
+        <button id="btn">save</button>
+        <p>0 / 500</p>
+        
+    </div>
+    
+
+    <div id="downloadBar">
+        <div id="progressBar"></div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

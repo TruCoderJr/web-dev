@@ -1,0 +1,65 @@
+.container{
+    height: 97.5vh;
+    width: 98vw;
+    /* background-color: gray; */
+    background-origin: 2px solid black;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    gap: 10px;
+
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+.item{
+    border: 2px solid black;
+    background-color: pink;
+}
+.header{
+    grid-row: 1/2;
+    grid-column: 1/13;
+}
+
+.footer{
+    grid-row: 12/13;
+    grid-column: 1/13;
+}
+
+.sidebar{
+    grid-row: 2/12;
+    grid-column: 1/4;
+}
+.nav{
+    grid-row: 2/3;
+    grid-column: 4 /10;
+}
+.main{
+    grid-row: 3/12;
+    grid-column: 4/10;
+}
+
+.ads{
+    grid-row: 2/12;
+    grid-column: 10/13;
+}
+
+.loader{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid goldenrod;
+    animation: load 2s ease-in-out 0s infinite forwards alternate-reverse;
+}
+
+@keyframes load {
+    from{
+        transform:rotate(0deg);
+        border-top: 16px solid goldenrod;
+    }
+    to{
+        transform:rotate(360deg);
+        border-top: 0px solid goldenrod;
+    }
+}

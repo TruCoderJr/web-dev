@@ -1,0 +1,17 @@
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+h1{
+    color: #1b74e4;
+}
+.userbut{
+    background-color: aqua;
+}
+/* input + button{
+    color: white;
+    background-color: black;
+} */
+#searchbutt{
+    color: white;
+    background-color: black;
+}

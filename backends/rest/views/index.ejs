@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Posts</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Quora Posts</h1>
+      <!-- <input type="text" placeholder=" Search Post" name="search">
+      <button type="submit" class="search-button">Search</button> -->
+      <a href="/posts/new" class="new-post-button">New Post</a>
+    </div>
+
+    <% for (let post of posts) { %>
+      <div class="post">
+        <h3 class="user">@<%= post.username %></h3>
+        <h5 class="content"><%= post.content %></h5>
+        <a href="/posts/<%=post.id %>" class="new-post-button">View Details</a>
+        <a href="/posts/<%=post.id %>/edit" class="new-post-button edit-button">Edit</a>
+       
+        <form style="display: inline-block;" method="POST" action="/posts/<%= post.id %>?_method=DELETE">
+          <button class="new-post-button delete-button">Delete</button>
+        </form>
+      </div>
+    <% } %>
+  </body>
+</html>

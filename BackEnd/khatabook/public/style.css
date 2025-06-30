@@ -1,0 +1,41 @@
+body nav{
+    font-size: 1.5rem;
+}
+.navbar-brand{
+    font-size: 1.5rem;
+}
+
+#navbarSupportedContent{
+    position: absolute;
+    left: 1110px;
+    /* width: 2%; */
+}
+li{
+    margin: 0px 10px 0px 50px;
+}
+/* h4{
+    color: white;
+} */
+#containers{
+    background-color: rgba(30, 136, 229, 0.5);
+    width: 100vw;
+    height: 91.5vh;
+}
+
+.fileNamebtn{
+    font-size: 1.25rem;
+    width: 300px;
+    text-align: left;
+    align-content: space-between;
+}
+.updateDelete{
+    position: absolute;
+    /* text-align: right;
+    margin-left: 130px; */
+    left: 435px;
+}
+div button{
+    /* margin-bottom: 20px; */
+    display: block;
+}
+

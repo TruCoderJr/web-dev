@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2d2d2d;
+  }
+  
+  .game-container {
+    position: relative;
+    width: 360px;
+    height: 600px;
+    overflow: hidden;
+    background: #7EC850; /* Grass color on both sides */
+  }
+  
+  canvas {
+    background-color: #7EC850;
+    display: block;
+    border: 5px solid #444;
+  }
+  

@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+}
+#container{ 
+    height: 500px;
+    width: 80%; 
+    background-color: azure;
+    border: 2px solid black;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+#container div{
+    height: 100px;
+    width: 300px;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+}

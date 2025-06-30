@@ -1,0 +1,60 @@
+h1{
+    color: yellow;
+    text-align: center;
+    font-weight: bolder;
+    padding: 150px;
+    text-shadow: black;
+    font-size: 50px;
+}
+#nav{
+    width: 99.9%;
+    height: 80px;
+    background-color: #FBA834
+    ;
+    position: fixed;
+    /* margin: 0px 0px 10px 0px ; */
+}
+#logo{
+    width: 150px;
+    height: 150px;
+    background-color: chartreuse;
+    border-radius: 50%;
+    position: fixed;
+    text-align: center;
+    margin: 34% 0% 0% 87%;
+    background-image: url("deer.png");
+    background-size: cover;
+}
+.main div{
+    height: 450px;
+    width: 450px;
+    background-color: #50727B;
+    margin: 100px;
+    display: inline-block;
+}
+.content div{
+    height: 350px;
+    width: 98%;
+    margin: 15px;
+    border-radius: 20px;
+    background-color: #50727B;
+}
+footer div{
+    width: 99.9%;
+    height: 160px;
+    background-color: #750E21;
+    
+}
+/* #main1{
+    height: 500px;
+    width: 500px;
+    background-color: #50727B;
+    margin: 50px;
+}
+#main2{
+    height: 500px;
+    width: 500px;
+    background-color: #35374B;
+    margin: 50px;
+
+} */

@@ -1,0 +1,17 @@
+h1{
+    color: maroon;
+    text-align: center;
+    text-decoration: double wavy underline;
+    font-size: 60px;
+    letter-spacing: 15px;
+    font-family: Avant Garde, Didot ,Lucida;
+    
+}
+p{
+    line-height: 1.5;
+    font-size: 20px;
+}
+a{
+    color: maroon;
+    text-decoration: none;
+}

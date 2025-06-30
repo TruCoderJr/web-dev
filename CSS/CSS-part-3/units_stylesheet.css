@@ -1,0 +1,16 @@
+h1{
+    border: 5px solid blue;
+    width: 33.3%;
+}
+#outer{
+    width: 500px;
+    height: 500px;
+    background-color: crimson;
+    margin: 30px;
+}
+#inner{
+    width: 150px;
+    height: 150px;
+    background-color: darkblue;
+    margin: 10%;
+}

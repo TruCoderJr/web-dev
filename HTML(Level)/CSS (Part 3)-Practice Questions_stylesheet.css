@@ -1,0 +1,18 @@
+#q1{
+    width: 300px;
+    height:150px;
+    background-color:grey;
+    border: 5px black dotted;
+    margin-top: 20px;
+    margin-right: 1em;
+    margin-bottom: 40px;
+    margin-left: 2em;
+    padding: 1em;
+}
+.q2{
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+    border-radius: 50%;
+    display: inline-block;
+}

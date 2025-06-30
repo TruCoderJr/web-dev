@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Posts</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Quora Posts</h1>
+      <!-- <input type="text" placeholder=" Search Post" name="search" />
+      <button type="submit" class="search-button">Search</button> -->
+      <a href="/posts/new" class="new-post-button">New Post</a>
+    </div>
+
+    <div class="post">
+      <% if(post != undefined){ %>
+        <h1>Here is your post in detail</h1>
+        <h3><%= post.id %></h3>
+        <h3 class="user">@<%= post.username %></h3>
+        <h5 class="content"><%= post.content %></h5>
+      <% }else{ %>
+        <h1>Not Found!!!</h1>
+      <% } %>
+    </div>
+  </body>
+</html>

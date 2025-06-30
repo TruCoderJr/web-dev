@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wallpaper</title>
+    <style>
+        /* Theme colors */
+        :root {
+            --tan: #b68d40;
+            --cream: #f4ebd0;
+            --charcoal: #122620;
+            --gold: #d6ad60;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cream);
+            margin: 0;
+            padding: 0;
+            color: var(--charcoal);
+        }
+
+        nav {
+            background-color: var(--tan);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Container with specific height for 16:9 aspect ratio */
+        .slideshow-container {
+            width: 100%;
+            height: auto;
+            max-width: 1200px; /* Optional, max size */
+            aspect-ratio: 16 / 9;
+            position: relative;
+            margin: 20px auto; /* Center the slideshow */
+            overflow: hidden;
+        }
+
+        .slideshow-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image maintains its aspect ratio */
+            display: block;
+        }
+
+        /* Dots/Indicators for Slideshow */
+        .dots {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--tan);
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: var(--cream);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Explore</a>
+        <a href="#">Wallpapers</a>
+        <a href="#">Login</a>
+    </nav>
+
+    <div class="slideshow-container">
+        <img src="https://images.unsplash.com/photo-1557626204-59dd03fd2d31?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Wallpaper 1">
+        <img src="https://images.unsplash.com/photo-1625510158194-a821c77a900f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Wallpaper 2">
+        <img src="https://images.unsplash.com/photo-1557360798-c91519105dd7?q=80&w=1633&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Wallpaper 3">
+        <img src="https://images.unsplash.com/photo-1549558549-415fe4c37b60?q=80&w=1419&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Wallpaper 4">
+        <img src="https://images.unsplash.com/photo-1577386227176-7a064d946a86?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Wallpaper 5">
+    </div>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script>
+        // Slideshow functionality
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.slideshow-container img');
+            let dots = document.querySelectorAll('.dot');
+            slides.forEach(slide => slide.style.display = 'none');
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = 'block';
+            dots[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+/* .folded-img {
+    width: 700px;
+    aspect-ratio: 1.92;
+    display: flex;
+    cursor: pointer;
+}
+.folded-img span {
+    width: 20%;
+    height: 100%;
+    background-image: url(pexels-pixabay-268533.jpg);
+    background-size: cover;
+    transition: 0.5s ease-in-out;
+    
+} */
+
+:root {
+    --width: 500px;
+}
+
+#main-container {
+    display: flex;
+    min-width: calc(var(--width) + 50px);
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.folded-img {
+    width: var(--width);
+    aspect-ratio: 1.92;
+    display: flex;
+    cursor: pointer;
+}
+
+.folded-img span {
+    width: 20%;
+    height: 100%;
+    background-image: url('https://i.ibb.co/kgmy09j/img.jpg');
+    background-size: cover;
+    transition: 0.5s ease-in-out;
+    box-shadow: inset 20px 0 50px rgba(0, 0, 0, .5);
+    background-position: calc(var(--i)*-50px);
+}
+
+.folded-img span:nth-child(odd) {
+    transform: skewY(12deg);
+}
+
+.folded-img span:nth-child(even) {
+    transform: skewY(-12deg);
+}
+
+.folded-img:hover span {
+    transform: none;
+    box-shadow: none;
+}

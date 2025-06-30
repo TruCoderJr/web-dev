@@ -1,0 +1,7 @@
+h1{
+    color: red;
+}
+.aeroplane{
+display: flexbox;
+justify-content: space-between;
+}

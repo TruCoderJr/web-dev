@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download</title>
+    <style>
+        #downloadBar{
+            position: absolute;
+            width: 25%;
+            height: 10px;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid black;
+            /* margin: auto; */
+            top: 40%;
+            left: 40%;
+            
+        }
+        #progressBar{
+            width: 100%;
+            height: 10px;
+            background-color: green;
+            border-radius: 10px;
+            transition: cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+        }
+        .message{
+            position: absolute;
+            top: 33%;
+            left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 7. Display a progress bar that updates in real-time, showing the progress of a task, download, or form submission. -->
+
+    <div id="downloadBar">
+        <div id="progressBar"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

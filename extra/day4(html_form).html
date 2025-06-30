@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form</title>
+</head>
+<body>
+    <form action="/action">
+        <button type="button"> Welcome to My Website</button>
+        <br>
+        <label for="username"> Enter Username : </label>
+        <input type="text" id="username" placeholder="Enter Username">
+        <br>
+        <label for="password"> Enter Password :</label>
+        <input type="password" id="password" placeholder="Enter Password">
+        <br>
+        <!-- <label for="age">Enter Your Age :</label>
+        <input type="number" id="age" placeholder="Enter Age">
+        <br>
+        <input type="submit" value="Submit by input"> -->
+        <button type="reset">Reset</button>
+        <button>login</button>
+        <br>
+        <div>
+            <input type="checkbox" id="remember" name="password">
+            <level for="remember">Remember me</level>
+        </div>
+
+        <br>
+        <div>
+            Choose your favorite subject 
+            <br>
+            <level for="remember">Math</level>
+            <input type="checkbox" id="Math" name="subject" value="Math">
+            <level for="remember">Science</level>
+            <input type="checkbox" id="Science" name="subject" value="Science">
+            <level for="remember">Social Science</level>
+            <input type="checkbox" id="Social Science" name="subject" value="Social Science">
+            <br>
+            Choose your favorite Fruit
+            <br>
+            <level for="Mango">Mango</level>
+            <input type="radio" id="Mango" name="Fruit" value="Mango">
+            <level for="Apple">Apple</level>
+            <input type="radio" id="Apple" name="Fruit" value="Apple">
+            <level for="Orange">Orange</level>
+            <input type="radio" id="Orange" name="Fruit" value="Orange">
+            
+        </div>
+
+        <div>
+            <br>
+            Choose Your State
+            <select name="State" id="State">
+            <option >choose</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Gujrat">Gujrat</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <level for="Volume">Select Volume Level</level>
+            <input type="range" id="Volume" name="vol" min="0" max="20" step="2" value="12">
+            <button type="submit">submit</button>
+        </div>
+        <br>
+        <div>
+            <level for="comment"> Leave Comment</level>
+            <br>
+            <textarea name="comment" placeholder="write comment here!" id="comment" cols="30" rows="10"></textarea>
+        </div>
+        
+    <!-- </form>
+    <hr>
+    <form action="https://www.google.com/search?">
+    <input type="text" placeholder="search in google" name="q">
+    <button>Search</button>
+    </form>
+
+    <form action="https://www.reddit.com/search/?q=cricket">
+        <input type="text" placeholder="search in reddit" name="q">
+        <button>Search</button>
+    </form> -->
+</body>
+</html>

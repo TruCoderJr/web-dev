@@ -1,0 +1,7 @@
+cp -r my-starter new-project
+cd new-project
+npm install
+npm run dev
+
+npm install react-router-dom
+npm install react-hook-form

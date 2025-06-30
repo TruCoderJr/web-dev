@@ -1,0 +1,53 @@
+*{
+    font-family: courier new;
+}
+
+h3{
+    color: purple;
+    text-decoration: underline;
+}
+
+h1{
+    color: #b92b27;
+}
+#login{
+    background-color: white;
+}
+#signup{
+    background-color: #b92b27;
+    color: white;
+}
+.upvote{
+    background-color: green;
+    color: yellow;
+}
+#myid {
+    color: green;
+    text-align: center;
+}
+.post a{
+    color: yellow;
+    background-color: red;
+}
+button:hover{
+    color: black;
+    background-color: red;
+}
+h3:hover{
+    text-decoration: double underline;
+}
+button:active{
+    background-color: blue;
+    color: yellow;
+}
+p:active{
+    font-weight: bold;
+    color: green;
+}
+input[type="radio"]:checked + label {
+    color: red;
+    font-weight: bold;
+}
+.post:nth-of-type(2n-1){
+    background-color: blanchedalmond;
+}
