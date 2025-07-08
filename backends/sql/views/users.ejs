@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f3f6fb;
+        }
+
+        tbody tr:hover {
+            background-color: #d6e4ff;
+        }
+
+        button {
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      label {
+        flex-grow: 1;
+      }
+    </style>
+</head>
+<body>
+    <h2>All User information</h2>
+    <table>
+        <tr>
+            <th>UserId</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Update</th>
+            <th>Remove</th>
+        </tr>
+        <% results.forEach(element => { %>
+            <tr>
+                <td><%= element.id %></td>
+                <td><%= element.username %></td>
+                <td><%= element.email %></td>
+                <td>
+                    <form method="get"  action="/users/<%= element.id %>/edit">
+                        <button>Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get"  action="/users/<%= element.id %>/delete">
+                        <button>Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

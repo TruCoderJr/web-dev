@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Users</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        background-color: #f7f9fc;
+        color: #333;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 60%;
+        margin: 0 auto 30px;
+        border-collapse: collapse;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f3f6fb;
+      }
+
+      tr:hover {
+        background-color: #d6e4ff;
+      }
+
+      form {
+        width: 60%;
+        margin: 0 auto;
+        /* display: flex;
+        justify-content: space-between;
+        align-items: center; */
+      }
+
+      input {
+        margin: 10px;
+        padding: 8px;
+        font-size: 16px;
+        width: 60%;
+      }
+
+      button {
+        margin: auto;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 80%;
+        border-radius: 10px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      label {
+        flex-grow: 1;
+      }
+      .container{
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User Information</h2>
+
+    <div class="container">
+      <table>
+        <tr>
+          <th>UserId</th>
+          <th>Username</th>
+        </tr>
+        <tr>
+          <td><%= results[0].id %></td>
+          <td><%= results[0].username %></td>
+        </tr>
+      </table>
+
+      <form action="/users/<%= results[0].id %>/delete" method="POST">
+        <label for="email">Enter your email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          value="<%= typeof newUsername !== 'undefined' ? newUsername : '' %>"
+        />
+
+        <br />
+        <label for="pass">Enter your password:</label>
+        <input type="password" id="pass" name="pass" />
+        <br />
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+
+    <% if (error) { %>
+    <div
+      id="errorBox"
+      style="
+        position: fixed;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f44336;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        font-weight: bold;
+        font-size: 16px;
+      "
+    >
+      ❌ invalid credentials, try again.
+    </div>
+
+    <script>
+      // Clear password field after DOM loads
+      document.addEventListener("DOMContentLoaded", function () {
+        // document.getElementById("pass").value = "";
+        // document.getElementById("email").value = `${newUsername}`;
+        // Optional: auto-hide after 3 seconds
+        setTimeout(() => {
+          document.getElementById("errorBox").style.display = "none";
+        }, 5000);
+      });
+    </script>
+    <% } %>
+  </body>
+</html>
