@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eChat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .navbar {
+        background-color: #343a40 !important;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        color: #fff;
+      }
+
+      .navbar h3 {
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .navbar form button {
+        background-color: #198754;
+        border: none;
+        color: white;
+        font-weight: 500;
+      }
+
+      #title {
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        color: #343a40;
+      }
+
+      .chat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-header {
+        font-weight: bold;
+        background-color: #e9ecef;
+        color: #212529;
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .card-title {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 0;
+      }
+
+      .card-text {
+        align-self: flex-end;
+        max-width: 80%;
+        padding: 0.75rem 1rem;
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 1rem;
+        border-bottom-right-radius: 0;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .card-text:hover {
+        background-color: #0b5ed7;
+      }
+
+      .card-footer {
+        font-size: 0.85rem;
+        text-align: right;
+        color: #6c757d;
+      }
+
+      .from-other .card-text {
+        align-self: flex-start;
+        background-color: #dee2e6;
+        color: #212529;
+        border-radius: 1rem;
+        border-bottom-left-radius: 0;
+      }
+
+      .from-other .card-text:hover {
+        background-color: #ced4da;
+      }
+
+      .update{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+      }
+      /* .card-text {
+        max-width: 80%;
+        padding: 0.75rem 1rem;
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 1rem;
+        border-bottom-right-radius: 0;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .from-other {
+        background-color: #dee2e6;
+        color: #212529;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 1rem; /* re-override */
+      
+      */
+
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <nav class="navbar d-flex justify-content-between align-items-center">
+        <h3>eChat</h3>
+        <form action="/chats/new">
+          <button class="btn btn-success" type="submit">
+            + New Chat
+          </button>
+        </form>
+      </nav>
+
+      <h2 id="title">All Chats</h2>
+
+      <div class="chat-grid">
+        <% for (const ele of allChats) { %>
+        <div class="card border-secondary <%= ele.from !== "trucoder" ? 'from-other' : '' %>">
+          <div class="card-header">
+            <%= ele.from %>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">
+              <%= ele.created.toString().split(" ")[4] %> | <%= ele.created.toString().split(" ").slice(0,4).join(" ") %>
+            </h6>
+            <div class="card-text d-flex flex-column <%= ele.from === 'trucoder' ? 'align-items-end' : 'align-items-start' %> gap-2">
+              <p class=" mb-0 <%= ele.from !== 'trucoder' ? 'from-other' : '' %>">
+                <%= ele.message %>
+              </p>
+              <div class="update">
+                <form action="/chats/<%= ele._id %>/edit" method="GET">
+                <button type="submit" class="btn btn-sm btn-light" title="Edit">
+                  <i class="fa fa-edit" style="color: red;"></i>
+                </button>
+              </form>
+              <form action="/chats/<%= ele._id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-sm btn-light" title="Edit">
+                  <i class="fa fa-trash-o" style="color:red"></i>
+                </button>
+              </form>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class="card-footer">
+            To: <strong><%= ele.to %></strong>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

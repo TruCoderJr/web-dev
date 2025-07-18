@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FeelLikeHome</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #343a40;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        padding-top: 70px;
+      }
+      nav{
+        box-shadow: 0 0 2px 0px gray;
+        /* box-shadow: ; */
+      }
+      .container {
+        max-width: 550px;
+        margin: auto;
+        padding: 1rem;
+        min-height: 100vh; /* full height of viewport */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* vertical center */
+        align-items: center;
+       }
+
+
+      .img-container {
+        width: 18rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background: #fff;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+
+      .img-container:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-img-top {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+        display: block;
+      }
+
+      .card-body {
+        padding: 1rem 1.25rem;
+        text-align: center;
+      }
+
+      .card-title {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #212529;
+      }
+
+      .card-text {
+        color: black;
+        font-size: 1rem;
+      }
+
+      .nav-item {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+      }
+
+      .navbar-nav {
+        align-items: center;
+      }
+
+      .listing {
+        max-width: 100%;
+        height: 400px;
+        width: 550px;
+        border-radius: 10px;
+        object-fit: cover;
+        display: block;
+        margin: 1rem 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      h1, h4 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      form button:hover {
+        background-color: #0b5ed7;
+      }
+
+      form {
+        display: inline-block;
+        margin-top: 1rem;
+      }
+      p{
+        font-weight: 500;
+      }
+      .btn{
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="/H.png" alt="FeelLikeHome" width="40" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto"> <!-- push menu to right -->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/listings">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listings">All Listings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/listings/new">Add Your Home</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+    <div>
+      <h2><%= details.title %></h2>
+      <img
+        class="listing"
+        src="<%= details.image.url %>"
+        alt="<%= details.image.title %>"
+      />
+      <h6><%= details.description %></h6>
+      <p>&#x20B9;<%= details.price %>/night</p>
+      <p><%= details.location %></p>
+      <p><%= details.country %></p>
+
+      <form action="/listings/<%= details._id %>/edit" method="GET">
+        <button class="btn btn-primary" type="submit">Edit</button>
+      </form>
+
+      <form action="/listings/<%= details._id %>" method="POST">
+        <!-- Add method override hidden input if needed for DELETE -->
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

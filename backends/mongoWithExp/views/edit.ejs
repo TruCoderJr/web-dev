@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eChat</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .navbar {
+        background-color: #343a40 !important;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        color: #fff;
+      }
+
+      .navbar h3 {
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .navbar form button {
+        background-color: #198754;
+        border: none;
+        color: white;
+        font-weight: 500;
+      }
+
+      #title {
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        color: #343a40;
+      }
+
+      .chat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .chat-form {
+        max-width: 600px;
+        margin: auto;
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .chat-form label {
+        font-weight: 500;
+      }
+
+      .chat-form textarea {
+        resize: none;
+      }
+
+      .chat-form button {
+        margin-top: 1rem;
+      }
+
+      .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card .card-title {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-text {
+        white-space: pre-wrap;
+        text-align: left;
+      }
+
+      .card-footer {
+        font-size: 0.85rem;
+        text-align: right;
+        color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <!-- Navbar -->
+      <nav class="navbar d-flex justify-content-between align-items-center">
+        <h3>eChat</h3>
+        <form action="/chats/new">
+          <button class="btn btn-success" type="submit">+ New Chat</button>
+        </form>
+      </nav>
+
+      <!-- Page Title -->
+      <h2 id="title" class="text-center">Delete Chat</h2>
+
+      <!-- Chat Form -->
+      <div class="chat-form">
+        <p>Message id = <%=chat._id %></p>
+        <p>This chat was send from <b><%=chat.from %></b> to <b><%=chat.to %></b></p>
+        <form action="/chats/<%=chat._id %>?_method=PUT" method="POST">
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="3"
+              class="form-control"
+            ><%= chat.message %></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Delete</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

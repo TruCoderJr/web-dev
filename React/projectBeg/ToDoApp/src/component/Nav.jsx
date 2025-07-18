@@ -12,7 +12,19 @@ function Nav() {
         <div className="flex justify-around gap-10 mr-10 items-center	">
           <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/">Home</NavLink>
           {/* <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/features">Features</NavLink> */}
-          <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/help">Help</NavLink>
+
+          
+        <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/AddTask">+New Task</NavLink>
+          
+        <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/ViewTask">All Tasks</NavLink>
+
+        <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/EditTask">Edit Tasks</NavLink>
+          
+        <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="/DeleteTask">Delete Tasks</NavLink>
+
+        
+
+        <NavLink className={(e)=> e.isActive? "text-red-600 shadow-xl":""} to="https://github.com/TruCoderJr/Todo">Code</NavLink>
           {/* <NavLink to="/home/:id"></NavLink> */}
         </div>
       </nav>
