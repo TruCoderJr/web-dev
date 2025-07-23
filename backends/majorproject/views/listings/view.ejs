@@ -1,0 +1,32 @@
+<% layout( "/layouts/biolerplate") %>
+
+<div class="container viewContainer">
+  <div>
+    <h2><%= details.title %></h2>
+    <img
+      class="viewListing"
+      src="<%= details.image.url %>"
+      alt="<%= details.image.title %>"
+    />
+    <h6><%= details.description %></h6>
+    <% if (details.price != undefined) { %>
+    <p class="card-text">
+      &#x20B9;<%= ele.price.toLocaleString("en-IN") %>/night
+    </p>
+
+    <% } %>
+    <p><%= details.location %></p>
+    <p><%= details.country %></p>
+
+    <div class="viewFormDiv">
+      <form action="/listings/<%= details._id %>/edit" method="GET">
+        <button class="btn btn-primary" type="submit">Edit</button>
+      </form>
+
+      <form action="/listings/<%= details._id %>?_method=DELETE" method="POST">
+        <!-- Add method override hidden input if needed for DELETE -->
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>

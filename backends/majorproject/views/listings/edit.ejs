@@ -1,0 +1,97 @@
+<% layout( "/layouts/biolerplate") %>
+<!-- Add Listing Form -->
+<div class="container EditContainer">
+  <div class="listing-form">
+    <h4>Upadte Details</h4>
+    <form class="needs-validation" novalidate action="/listings/<%=details._id %>?_method=PUT" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control"
+          placeholder="Give your space a catchy title"
+          value="<%= details.title%>"
+          required
+        />
+        <div class="invalid-feedback">Please enter title.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="3"
+          class="form-control"
+          placeholder="Share some details about your place"
+          required
+        > <%= details.description%></textarea>
+        <div class="invalid-feedback">Write short description</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image Link</label>
+        <input
+          type="text"
+          id="image"
+          name="image"
+          class="form-control"
+          placeholder="Paste your image link here"
+          value="<%= details.image.url %>%>"
+          required
+        />
+        <div class="invalid-feedback">Paste image link</div>
+      </div>
+
+      <div class="mb-3 row">
+        <div class="form-group col-md-6">
+          <label for="price" class="form-label">Price</label>
+          <div class="input-group">
+            <span class="input-group-text">&#x20B9;</span>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              placeholder="2500"
+              value="<%= details.price%>"
+              required
+            />
+            <div class="invalid-feedback">Please valid price</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="country" class="form-label">Country</label>
+          <input
+            type="text"
+            id="country"
+            name="country"
+            class="form-control"
+            placeholder="India"
+            value="<%= details.country%>"
+            required
+          />
+          <div class="invalid-feedback">Please enter valid country</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          class="form-control"
+          placeholder="Jaipur, Rajasthan"
+          value="<%= details.location%>"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid location.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Update</button>
+    </form>
+  </div>
+</div>
