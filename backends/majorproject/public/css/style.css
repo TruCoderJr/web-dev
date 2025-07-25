@@ -2,7 +2,7 @@
 body {
   background-color: #f8f9fa;
   color: #343a40;
-  padding-top: 70px;
+  /* padding-top: -10px; */
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -217,4 +217,48 @@ p {
 .btn {
   margin-right: 5px;
 }
+
+
+/* html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ✅ Not required unless overriding */
+/* * {
+  box-sizing: border-box;
+} */ 
+
+/* Make the body fill the viewport and arrange its children in a column */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* Let main content grow and push footer down */
+main {
+  flex: 1;
+}
+
+.errorDiv{
+  margin-top: 10%;
+  /* display: flex; */
+}
+/* 
+.alert-danger{
+  justify-content: center;
+  align-items: center; */
+/* } */
 

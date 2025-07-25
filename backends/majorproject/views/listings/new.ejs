@@ -4,13 +4,13 @@
 <div class="container EditContainer">
   <div class="listing-form">
     <h4>Add Your Home</h4>
-    <form class="needs-validation" action="/listings/new" method="POST" novalidate>
+    <form class="needs-validation" action="/listings" method="POST" novalidate>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
           type="text"
           id="title"
-          name="title"
+          name="listing[title]"
           class="form-control"
           placeholder="Give your space a catchy title"
           required
@@ -22,7 +22,7 @@
         <label for="description" class="form-label">Description</label>
         <textarea
           id="description"
-          name="description"
+          name="listing[description]"
           rows="3"
           class="form-control"
           placeholder="Share some details about your place"
@@ -36,7 +36,7 @@
         <input
           type="text"
           id="image"
-          name="image"
+          name="listing[image]"
           class="form-control"
           placeholder="Paste your image link here"
         />
@@ -51,7 +51,7 @@
               type="number"
               class="form-control"
               id="price"
-              name="price"
+              name="listing[price]"
               placeholder="2500"
               required
             />
@@ -63,7 +63,7 @@
           <input
             type="text"
             id="country"
-            name="country"
+            name="listing[country]"
             class="form-control"
             placeholder="India"
             required
@@ -78,7 +78,7 @@
         <input
           type="text"
           id="location"
-          name="location"
+          name="listing[location]"
           class="form-control"
           placeholder="Jaipur, Rajasthan"
           required

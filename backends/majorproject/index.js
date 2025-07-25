@@ -6,7 +6,10 @@ const Listing = require("./models/listing");
 const engine = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
+const { listingSchema } = require("./schema");
+const { log, error } = require("console");
 const app = express();
+// const {listingSchema} = require("./schema.js")
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -24,6 +27,17 @@ async function main() {
   console.log("Database connected");
 }
 main().catch((err) => console.log(err));
+
+const validateListing = (req, res, next) => {
+  const {error} = listingSchema.validate(req.body);
+
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(400, msg);
+  }else{
+    next()
+  }
+};
 
 // Root route
 app.get("/", (req, res) => {
@@ -53,20 +67,18 @@ app.get("/listings/new", (req, res) => {
 
 // Create new listing
 app.post(
-  "/listings/new",
-  wrapAsync(async (req, res) => {
-    const { title, description, image, price, location, country } = req.body;
-    const newListing = new Listing({
-      title,
-      description,
+  "/listings",
+  validateListing,
+  wrapAsync(async (req, res, next) => {
+    const data = {
+      ...req.body.listing,
       image: {
+        url: req.body.listing.image,
         filename: "listingimage",
-        url: image,
       },
-      price,
-      location,
-      country,
-    });
+    };
+
+    const newListing = new Listing(data);
 
     await newListing.save();
     res.redirect("/listings");
@@ -88,26 +100,18 @@ app.get(
 
 // Update listing
 app.put(
-  "/listings/:id",
+  "/listings/:id", validateListing,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const { title, description, image, price, location, country } = req.body;
-
-    const updated = await Listing.findByIdAndUpdate(
-      id,
-      {
-        title,
-        description,
-        image: {
-          filename: "listingimage",
-          url: image,
-        },
-        price,
-        location,
-        country,
+    const data = {
+      ...req.body.listing,
+      image: {
+        url: req.body.listing.image,
+        filename: "listingimage",
       },
-      { new: true }
-    );
+    };
+
+    const updated = await Listing.findByIdAndUpdate(id, { ...data });
 
     res.redirect(`/listings`);
   })
@@ -137,13 +141,19 @@ app.get(
   })
 );
 
-app.all("*", (req, res, next) => {
-  next(new ExpressError(404, "Page not found"));
-});
+// app.all("*", (req, res, next) => {
+//   let newErr = new ExpressError(404, "Page not found");
+//   next(newErr);
+// });
 
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something went wrong!" } = err;
-  res.status(status).send(message);
+  // res.status(status).send(message);
+  res.status(status).render("listings/error", {
+    layout: "layouts/biolerplate",
+    title: "Edit Listing",
+    message,
+  });
 });
 
 // Start server
