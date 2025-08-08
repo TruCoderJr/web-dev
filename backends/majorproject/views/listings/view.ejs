@@ -28,5 +28,110 @@
         <button class="btn btn-danger" type="submit">Delete</button>
       </form>
     </div>
+    <br />
+    <hr />
+
+    <div class="forReview mt-4">
+      <h4 class="mb-3">User Reviews</h4>
+
+      <% if (details.review && details.review.length) { %>
+      <div class="row row-cols-1 g-4">
+        <% for (let ele of details.review) { %>
+        <div class="col mt-3">
+          <div class="card shadow-sm border-primary p-2 d-flex flex-column justify-content-between"
+            style="margin-bottom: 0">
+            <div class="card-body">
+              <div class="pastedDate d-flex flex-row justify-content-between">
+                <p
+                  class="text-muted font-weight-light font-italic"
+                  style="margin: 0"
+                >
+                  <i class="bi card-text bi-person-circle card-subtitle"
+                    ><%= ele.userid %></i
+                  >
+                </p>
+                <p
+                  class="text-muted font-weight-light font-italic"
+                  style="margin: 0"
+                >
+                  <i class="bi card-text bi-person-circle card-subtitle"
+                    ><%= ele.createdAt.toString().split(" ")[2]%> <%= ele.createdAt.toString().split(" ")[1]%> <%= ele.createdAt.toString().split(" ")[3]%></i
+                  >
+                </p>
+              </div>
+              <p style="margin: 0"><%= ele.comment %></p>
+              
+            </div>
+            <div class="bg-transparent">
+              <% for (let i = 1; i <= 5; i++) { %> <% if (i <= ele.rating) { %>
+              <span class="text-warning">★</span>
+              <% } else { %>
+              <span class="text-muted">☆</span>
+              <% } %> <% } %>
+            </div>
+            <form action="/listings/<%= details._id %>/reviews/<%= ele._id %>?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+          <% } %>
+        
+        </div>
+        <% } else { %>
+        <p class="text-muted">No reviews yet. Be the first to leave one!</p>
+        <% } %>
+      </div>
+      <br />
+      <hr />
+
+      <div>
+        <h3 style="margin: 0; padding: 0; text-align: center">Leave Review:</h3>
+        <form
+          action="/listings/<%= details._id %>/reviews"
+          method="POST"
+          novalidate
+          class="needs-validation"
+        >
+          <div class="mb-3 has-validation">
+            <label for="userid" class="form-label">User id:</label>
+            <input
+              type="text"
+              id="userid"
+              name="review[userid]"
+              class="form-control"
+              placeholder="Enter your user id"
+              required
+            />
+            <div class="invalid-feedback">Please choose a username.</div>
+          </div>
+
+          <div class="mb-3 has-validation">
+            <label for="comment" class="form-label">Comments:</label>
+            <textarea
+              id="comment"
+              name="review[comment]"
+              rows="3"
+              class="form-control"
+              placeholder="leave a comment"
+              required
+            ></textarea>
+            <div class="invalid-feedback">please leave some comment</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="rating" class="form-label">Give rating:</label>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              id="rating"
+              name="review[rating]"
+              class="form-range"
+              value="1"
+            />
+            <button class="btn btn-info mt-3" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

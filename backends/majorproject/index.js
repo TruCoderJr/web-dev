@@ -6,10 +6,10 @@ const Listing = require("./models/listing");
 const engine = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const { listingSchema } = require("./schema");
+const { listingSchema, reviewSchema } = require("./schema");
 const { log, error } = require("console");
 const app = express();
-// const {listingSchema} = require("./schema.js")
+const Review = require("./models/review");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -28,14 +28,35 @@ async function main() {
 }
 main().catch((err) => console.log(err));
 
+app.use((req, res, next) => {
+  console.log("Request path:", req.path);
+  console.log("Method:", req.method);
+  console.log("Raw body:", req.body);
+  next();
+});
+
+
 const validateListing = (req, res, next) => {
-  const {error} = listingSchema.validate(req.body);
+  const { error } = listingSchema.validate(req.body);
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(400, msg);
-  }else{
-    next()
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
+  console.log("req body:",req.body);
+  
+  if (error) {
+    console.log(error); 
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(400, msg);
+  } else {
+    next();
   }
 };
 
@@ -56,6 +77,32 @@ app.get(
     });
   })
 );
+
+// review route
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
+  const listing = await Listing.findById(req.params.id); // ✅ await used properly
+
+  if (!listing) {
+    throw new ExpressError(404, "Listing not found");
+  }
+
+  const newReview = new Review(req.body.review); // ✅ create new review
+  await newReview.save(); // ✅ save review first
+
+  listing.review.push(newReview); // ✅ push to the listing's review array
+  await listing.save(); // ✅ save listing after pushing review
+
+  res.redirect(`/listings/${listing._id}`); // ✅ redirect to view page
+}));
+
+app.delete("/listings/:id/reviews/:rewId", wrapAsync(async (req, res)=>{
+  let {id, rewId} = req.params;
+
+  await Listing.findByIdAndUpdate(id, {$pull: {review : rewId}});
+  await Review.findByIdAndDelete(rewId);
+
+  res.redirect(`/listings/${id}`);
+}))
 
 // Form to create new listing
 app.get("/listings/new", (req, res) => {
@@ -100,7 +147,8 @@ app.get(
 
 // Update listing
 app.put(
-  "/listings/:id", validateListing,
+  "/listings/:id",
+  validateListing,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const data = {
@@ -132,7 +180,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const details = await Listing.findById(id);
+    const details = await Listing.findById(id).populate('review');;
     res.render("listings/view", {
       layout: "layouts/biolerplate",
       title: details.title,
