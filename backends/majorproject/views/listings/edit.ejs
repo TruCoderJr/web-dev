@@ -1,6 +1,8 @@
 <% layout( "/layouts/biolerplate") %>
 <!-- Add Listing Form -->
 <div class="container EditContainer">
+  
+  <%- include('../includes/flash') %>
   <div class="listing-form">
     <h4>Upadte Details</h4>
     <form class="needs-validation" novalidate action="/listings/<%=details._id %>?_method=PUT" method="POST">
