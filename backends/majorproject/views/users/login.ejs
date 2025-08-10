@@ -1,0 +1,44 @@
+<% layout( "/layouts/biolerplate") %>
+
+<!-- Add Listing Form -->
+<div class="container EditContainer">
+  <div class="row mt-3">
+    <div class="col-6 offset-3">
+      <%- include('../includes/flash') %>
+      <h1>login</h1>
+    </div>
+    <div class="col-6 offset-3">
+      <form
+        action="/user/login"
+        method="post"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Enter unique username"
+            required
+          />
+          <div class="invalid-feedback">Please enter username</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter strong password"
+            required
+          />
+        </div>
+        <button class="btn btn-success">Log in</button>
+      </form>
+    </div>
+  </div>
+</div>
