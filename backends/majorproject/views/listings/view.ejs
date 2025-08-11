@@ -1,7 +1,6 @@
 <% layout( "/layouts/biolerplate") %>
 
 <div class="container viewContainer">
-  
   <%- include('../includes/flash') %>
   <div>
     <h2><%= details.title %></h2>
@@ -40,8 +39,10 @@
       <div class="row row-cols-1 g-4">
         <% for (let ele of details.review) { %>
         <div class="col mt-3">
-          <div class="card shadow-sm border-primary p-2 d-flex flex-column justify-content-between"
-            style="margin-bottom: 0">
+          <div
+            class="card shadow-sm border-primary p-2 d-flex flex-column justify-content-between"
+            style="margin-bottom: 0"
+          >
             <div class="card-body">
               <div class="pastedDate d-flex flex-row justify-content-between">
                 <p
@@ -57,26 +58,27 @@
                   style="margin: 0"
                 >
                   <i class="bi card-text bi-person-circle card-subtitle"
-                    ><%= ele.createdAt.toString().split(" ")[2]%> <%= ele.createdAt.toString().split(" ")[1]%> <%= ele.createdAt.toString().split(" ")[3]%></i
+                    ><%= ele.createdAt.toString().split(" ")[2]%> <%=
+                    ele.createdAt.toString().split(" ")[1]%> <%=
+                    ele.createdAt.toString().split(" ")[3]%></i
                   >
                 </p>
               </div>
               <p style="margin: 0"><%= ele.comment %></p>
-              
             </div>
             <div class="bg-transparent">
-              <% for (let i = 1; i <= 5; i++) { %> <% if (i <= ele.rating) { %>
-              <span class="text-warning">★</span>
-              <% } else { %>
-              <span class="text-muted">☆</span>
-              <% } %> <% } %>
+              <p class="starability-result" data-rating="<%= ele.rating %>"
+                >
+              </p>
             </div>
-            <form action="/listings/<%= details._id %>/reviews/<%= ele._id %>?_method=DELETE" method="post">
+            <form
+              action="/listings/<%= details._id %>/reviews/<%= ele._id %>?_method=DELETE"
+              method="post"
+            >
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
           </div>
           <% } %>
-        
         </div>
         <% } else { %>
         <p class="text-muted">No reviews yet. Be the first to leave one!</p>
@@ -119,19 +121,58 @@
             <div class="invalid-feedback">please leave some comment</div>
           </div>
 
-          <div class="mb-3">
+          <div>
             <label for="rating" class="form-label">Give rating:</label>
-            <input
-              type="range"
-              min="1"
-              max="5"
-              id="rating"
-              name="review[rating]"
-              class="form-range"
-              value="1"
-            />
-            <button class="btn btn-info mt-3" type="submit">Submit</button>
+
+            <fieldset class="starability-heart">
+              <input
+                type="radio"
+                id="no-rate"
+                class="input-no-rate"
+                name="review[rating]"
+                value="0"
+                checked
+                aria-label="No rating."
+              />
+              <input
+                type="radio"
+                id="second-rate1"
+                name="review[rating]"
+                value="1"
+              />
+              <label for="second-rate1" title="Terrible">1 star</label>
+              <input
+                type="radio"
+                id="second-rate2"
+                name="review[rating]"
+                value="2"
+              />
+              <label for="second-rate2" title="Not good">2 stars</label>
+              <input
+                type="radio"
+                id="second-rate3"
+                name="review[rating]"
+                value="3"
+              />
+              <label for="second-rate3" title="Average">3 stars</label>
+              <input
+                type="radio"
+                id="second-rate4"
+                name="review[rating]"
+                value="4"
+              />
+              <label for="second-rate4" title="Very good">4 stars</label>
+              <input
+                type="radio"
+                id="second-rate5"
+                name="review[rating]"
+                value="5"
+              />
+              <label for="second-rate5" title="Amazing">5 stars</label>
+            </fieldset>
           </div>
+
+          <button class="btn btn-info" type="submit">Submit</button>
         </form>
       </div>
     </div>

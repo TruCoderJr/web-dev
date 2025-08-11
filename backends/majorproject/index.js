@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "producrion") {
+  require('dotenv').config()
+}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -48,10 +52,12 @@ main().catch((err) => console.log(err));
 app.use(session(sessionOption));
 app.use(flash());
 app.use(passport.initialize());
+app.use(passport.session()); // <-- This keeps the user logged in
+
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser())
+passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
@@ -60,6 +66,8 @@ app.use((req, res, next) => {
   // console.log("Raw body:", req.body);
   res.locals.sussMsg = req.flash("success")[0];
   res.locals.error = req.flash("error")[0];
+  res.locals.isLogin = req.isAuthenticated(); // <-- Added this
+  res.locals.currentUser = req.user; 
   next();
 });
 
@@ -69,19 +77,9 @@ app.use("/user", usersRouter);
 
 // Root route
 app.get("/", (req, res) => {
-  res.redirect("/user/signup")
+  res.redirect("/user/login")
 });
 
-app.get("/demouser", async (req, res)=>{
-
-  let fakeUser = new User({
-    email: "catchme@gmail.com",
-    username: "trucoder"
-  });
-
-  let reg = await User.register(fakeUser,"trucoder7@");
-  res.send(reg);
-})
 
 // app.all("*", (req, res, next) => {
 //   let newErr = new ExpressError(404, "Page not found");
@@ -89,6 +87,8 @@ app.get("/demouser", async (req, res)=>{
 // });
 
 app.use((err, req, res, next) => {
+  console.log(err);
+  
   let { status = 500, message = "Something went wrong!" } = err;
   // res.status(status).send(message);
   res.status(status).render("listings/error", {

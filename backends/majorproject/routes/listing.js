@@ -3,130 +3,37 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
-const Listing = require("../models/listing");
-// const flash = require("connect-flash");
+const listingController = require("../controllers/listings");
+const { validateListing, saveReturnTo, isLoggedIn } = require("../middleware");
+const multer  = require('multer')
+const {storage} = require("../cloudConfig")
 
-const validateListing = (req, res, next) => {
-  const { error } = listingSchema.validate(req.body);
+const upload = multer({ storage })
 
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(400, msg);
-  } else {
-    next();
-  }
-};
-
-// Show all listings
-router.get(
-  "/",
-  wrapAsync(async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index", {
-      layout: "layouts/biolerplate",
-      title: "All Listings",
-      allListings,
-    });
-  })
-);
 
 // Form to create new listing
-router.get("/new", (req, res) => {
-  res.render("listings/new", {
-    layout: "layouts/biolerplate",
-    title: "Add New Listing",
-  });
-});
+router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-// Create new listing
-router.post(
-  "/",
-  validateListing,
-  wrapAsync(async (req, res, next) => {
-    const data = {
-      ...req.body.listing,
-      image: {
-        url: req.body.listing.image,
-        filename: "listingimage",
-      },
-    };
+// Edit Form
+router.get("/:id/edit", wrapAsync(listingController.renderEditForm));
 
-    const newListing = new Listing(data);
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
+  .post(
+    isLoggedIn,
+    validateListing,
+    upload.single('listing[image]'),
+    wrapAsync(listingController.createListing)
+  );
+  // .post(upload.single('listing[image]'), (req, res)=>{
+  //   res.send(req.file)
+  // })
 
-    await newListing.save();
-    req.flash("success", "New listing is added succesfully!!");
-    res.redirect("/listings");
-  })
-);
-// Edit form
-router.get(
-  "/:id/edit",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const details = await Listing.findById(id);
-    if (!details) {
-      req.flash("error", "Listing does not exits.!!");
-      res.redirect("/listings");
-    } else {
-      res.render("listings/edit", {
-        layout: "layouts/biolerplate",
-        title: "Edit Listing",
-        details,
-      });
-    }
-  })
-);
-
-// Update listing
-router.put(
-  "/:id",
-  validateListing,
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const data = {
-      ...req.body.listing,
-      image: {
-        url: req.body.listing.image,
-        filename: "listingimage",
-      },
-    };
-
-    const updated = await Listing.findByIdAndUpdate(id, { ...data });
-
-    req.flash("success", "Listing is updated succesfully!!");
-    res.redirect(`/listings/${id}`);
-  })
-);
-
-router.delete(
-  "/:id",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const deleted = await Listing.findByIdAndDelete(id);
-    console.log(deleted);
-
-    req.flash("success", "Listing is deleted succesfully!!");
-    res.redirect("/listings");
-  })
-);
-
-// Show one listing
-router.get(
-  "/:id",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const details = await Listing.findById(id).populate("review");
-    if (!details) {
-      req.flash("error", "Listing does not exits.!!");
-      res.redirect("/listings");
-    } else {
-      res.render("listings/view", {
-        layout: "layouts/biolerplate",
-        title: details.title,
-        details,
-      });
-    }
-  })
-);
-
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.showListing))
+  .put(validateListing, wrapAsync(listingController.updateListing))
+  .delete(wrapAsync(listingController.destroyListing));
+  
 module.exports = router;

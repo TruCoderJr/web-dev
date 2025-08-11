@@ -1,62 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync");
-const User = require("../models/user");
 const passport = require("passport");
+const userController = require("../controllers/user");
 
-router.get(
-  "/signup",
-  wrapAsync(async (req, res) => {
-    res.render("users/signup", {
-      layout: "layouts/biolerplate",
-      title: "Sign Up",
-    });
-  })
-);
+router
+  .route("/signup")
+  .get(wrapAsync(userController.signupForm))
+  .post(wrapAsync(userController.signup));
 
-router.post(
-  "/signup",
-  wrapAsync(async (req, res) => {
-    try {
-      let { email, username, password } = req.body;
+router
+  .route("/login")
+  .get(wrapAsync(userController.loginForm))
+  .post(
+    passport.authenticate("local", {
+      failureRedirect: "/user/login",
+      failureFlash: true,
+    }),
+    userController.login
+  );
 
-      let newUser = new User({ email, username });
-
-      let reg = await User.register(newUser, password);
-      // await newUser.save();
-      console.log(reg);
-      req.flash("success", "Welcome to FeelLikeHome");
-
-      res.redirect("/listings");
-    } catch (error) {
-      req.flash("error", error.message);
-      console.log(error);
-
-      res.redirect("/user/signup");
-    }
-  })
-);
-
-router.get(
-  "/login",
-  wrapAsync(async (req, res) => {
-    res.render("users/login", {
-      layout: "layouts/biolerplate",
-      title: "Login",
-    });
-  })
-);
-
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/user/login",
-    failureFlash: true,
-  }),
-  wrapAsync(async (req, res) => {
-    req.flash("success", "Welcome to FeelLikeHome");
-    res.redirect("/listings");
-  })
-);
+router.get("/logout", userController.lagout);
 
 module.exports = router;
